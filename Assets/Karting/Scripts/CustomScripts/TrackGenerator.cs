@@ -9,22 +9,21 @@ public class TrackGenerator : MonoBehaviour
 	private Transform lastGeneratedEndTrack;
 
 	[SerializeField]
-	private GameObject track;
+	private GameObject[] track;
 
-
-	void OnTriggerEnter(Collider other)
+	public void GenerateTrack()
 	{
-		if (other.gameObject.layer == 11)
-		{
-			Debug.Log("Yes !");
-			Destroy(other.gameObject);
-			lastGeneratedEndTrack = lastGeneratedTrack.GetComponent<Track>().GetEnd();
-			lastGeneratedTrack = Instantiate(track, lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
-		}
+		lastGeneratedEndTrack = lastGeneratedTrack.GetComponentInChildren<Track>().GetEnd();
+		lastGeneratedTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
 	}
 
-    // Start is called before the first frame update
-    void Start()
+	private GameObject RandomTrack()
+	{
+		return (track[Random.Range(0, track.Length)]);
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }

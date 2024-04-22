@@ -11,8 +11,17 @@ public class Track : MonoBehaviour
 		return end;
 	}
 
-    // Start is called before the first frame update
-    void Start()
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.layer == 13)
+		{
+			Destroy(gameObject);
+			other.gameObject.GetComponentInParent<TrackGenerator>().GenerateTrack();
+		}
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
