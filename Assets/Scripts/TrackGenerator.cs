@@ -14,7 +14,9 @@ public class TrackGenerator : MonoBehaviour
 	public void GenerateTrack()
 	{
 		lastGeneratedEndTrack = lastGeneratedTrack.GetComponentInChildren<Track>().GetEnd();
-		lastGeneratedTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
+		GameObject futureTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
+		lastGeneratedTrack.GetComponentInChildren<Track>().SetNextTrack(futureTrack.GetComponentInChildren<Track>());
+        lastGeneratedTrack = futureTrack;
 	}
 
 	private GameObject RandomTrack()

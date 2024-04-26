@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2341854084225946067}
   - component: {fileID: 721453394894894391}
   m_Layer: 11
-  m_Name: TrackCollider
+  m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   end: {fileID: 4492583929296925444}
+  enemyTrack: {fileID: 3926610483578525684}
+  nextTrack: {fileID: 0}
 --- !u!1 &4279005857701010022
 GameObject:
   m_ObjectHideFlags: 0
