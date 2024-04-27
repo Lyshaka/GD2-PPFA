@@ -19,8 +19,14 @@ public class Track : MonoBehaviour
 	[SerializeField] private CollectibleGenerator collectibleGenerator;
 
 	[SerializeField] private float enemyTrackLength;
+    [SerializeField] private float angle;
 
-	public void SetGameManager(GameManager gm)
+    public float GetAngle()
+	{
+		return angle;
+	}
+
+    public void SetGameManager(GameManager gm)
 	{
 		gameManager = gm;
 	}
