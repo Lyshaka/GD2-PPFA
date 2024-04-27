@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TrackGenerator : MonoBehaviour
 {
-	[SerializeField] private int randomSeed;
+    [SerializeField] private GameManager gameManager;
+
+    [SerializeField] private int randomSeed;
 
     [SerializeField]
 	private GameObject lastGeneratedTrack;
@@ -19,6 +21,7 @@ public class TrackGenerator : MonoBehaviour
 		GameObject futureTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
 		lastGeneratedTrack.GetComponentInChildren<Track>().SetNextTrack(futureTrack.GetComponentInChildren<Track>());
         futureTrack.GetComponentInChildren<Track>().SetPrevTrack(lastGeneratedTrack.GetComponentInChildren<Track>());
+		futureTrack.GetComponentInChildren<Track>().SetGameManager(gameManager);
         lastGeneratedTrack = futureTrack;
 	}
 

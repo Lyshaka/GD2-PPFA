@@ -5,15 +5,25 @@ using UnityEngine.Splines;
 
 public class Track : MonoBehaviour
 {
+	private GameManager gameManager;
+
 	[SerializeField] private Transform end;
 	[SerializeField] private SplineContainer enemyTrack;
 
-	[SerializeField] private Track nextTrack;
+	[SerializeField] private GameObject signR;
+    [SerializeField] private GameObject signL;
+
+    [SerializeField] private Track nextTrack;
 	[SerializeField] private Track prevTrack;
 
 	[SerializeField] private CollectibleGenerator collectibleGenerator;
 
 	[SerializeField] private float enemyTrackLength;
+
+	public void SetGameManager(GameManager gm)
+	{
+		gameManager = gm;
+	}
 
 	public Transform GetEnd()
 	{
@@ -30,12 +40,12 @@ public class Track : MonoBehaviour
 		nextTrack = track;
 	}
 
-    public void SetPrevTrack(Track track)
-    {
-        prevTrack = track;
-    }
+	public void SetPrevTrack(Track track)
+	{
+		prevTrack = track;
+	}
 
-    public SplineContainer GetEnemyTrack()
+	public SplineContainer GetEnemyTrack()
 	{
 		return enemyTrack;
 	}
@@ -50,7 +60,7 @@ public class Track : MonoBehaviour
 		return enemyTrackLength;
 	}
 
-    void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.layer == 13)
 		{
@@ -60,11 +70,28 @@ public class Track : MonoBehaviour
 	}
 
 	void Start()
-    {
-        enemyTrackLength = enemyTrack.CalculateLength();
+	{
+		enemyTrackLength = enemyTrack.CalculateLength();
+		if (gameManager != null)
+		{
+            gameManager.AddRoadLength(enemyTrackLength);
+            if (gameManager.ReachedMilestone())
+            {
+                if (Random.Range(0f, 1f) < 0.5f)
+                {
+                    signR.SetActive(true);
+                    signR.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
+                }
+                else
+                {
+                    signL.SetActive(true);
+                    signL.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
+                }
+            }
+        }
 		if (prevTrack != null)
 		{
-            GenerateCollectibleSpline();
-        }
-    }
+			GenerateCollectibleSpline();
+		}
+	}
 }
