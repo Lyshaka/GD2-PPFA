@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TrackGenerator : MonoBehaviour
 {
-	[SerializeField]
+	[SerializeField] private int randomSeed;
+
+    [SerializeField]
 	private GameObject lastGeneratedTrack;
 	private Transform lastGeneratedEndTrack;
 
@@ -16,6 +18,7 @@ public class TrackGenerator : MonoBehaviour
 		lastGeneratedEndTrack = lastGeneratedTrack.GetComponentInChildren<Track>().GetEnd();
 		GameObject futureTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
 		lastGeneratedTrack.GetComponentInChildren<Track>().SetNextTrack(futureTrack.GetComponentInChildren<Track>());
+        futureTrack.GetComponentInChildren<Track>().SetPrevTrack(lastGeneratedTrack.GetComponentInChildren<Track>());
         lastGeneratedTrack = futureTrack;
 	}
 
@@ -24,15 +27,8 @@ public class TrackGenerator : MonoBehaviour
 		return (track[Random.Range(0, track.Length)]);
 	}
 
-	// Start is called before the first frame update
-	void Start()
+    void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Random.InitState(randomSeed);
     }
 }

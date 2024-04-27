@@ -9,8 +9,11 @@ public class Track : MonoBehaviour
 	[SerializeField] private SplineContainer enemyTrack;
 
 	[SerializeField] private Track nextTrack;
+	[SerializeField] private Track prevTrack;
 
-	[SerializeField] private float trackLength;
+	[SerializeField] private CollectibleGenerator collectibleGenerator;
+
+	[SerializeField] private float enemyTrackLength;
 
 	public Transform GetEnd()
 	{
@@ -27,17 +30,27 @@ public class Track : MonoBehaviour
 		nextTrack = track;
 	}
 
-	public SplineContainer GetEnemyTrack()
+    public void SetPrevTrack(Track track)
+    {
+        prevTrack = track;
+    }
+
+    public SplineContainer GetEnemyTrack()
 	{
 		return enemyTrack;
 	}
 
-	public float GetTrackLength()
+	public void GenerateCollectibleSpline()
 	{
-		return trackLength;
+		collectibleGenerator.GenerateSpline(prevTrack.collectibleGenerator.GetEnd());
 	}
 
-	void OnTriggerEnter(Collider other)
+	public float GetTrackLength()
+	{
+		return enemyTrackLength;
+	}
+
+    void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.layer == 13)
 		{
@@ -48,6 +61,10 @@ public class Track : MonoBehaviour
 
 	void Start()
     {
-        trackLength = enemyTrack.CalculateLength();
+        enemyTrackLength = enemyTrack.CalculateLength();
+		if (prevTrack != null)
+		{
+            GenerateCollectibleSpline();
+        }
     }
 }
