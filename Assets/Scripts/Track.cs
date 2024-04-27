@@ -46,15 +46,8 @@ public class Track : MonoBehaviour
 		}
 	}
 
-	// Start is called before the first frame update
 	void Start()
     {
         trackLength = enemyTrack.CalculateLength();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
