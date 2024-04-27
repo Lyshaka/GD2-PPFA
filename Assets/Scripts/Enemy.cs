@@ -8,15 +8,18 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 1f;
     [SerializeField] private bool activated = false;
-	[SerializeField] private float t = 0;
-	[SerializeField] private SplineContainer spline;
-	[SerializeField] private Track currentTrack;
-	[SerializeField] private Track nextTrack;
+    [SerializeField] private Track firstTrack;
+    private float t = 0;
+	private SplineContainer spline;
+    private Track currentTrack;
+	private Track nextTrack;
+    private Track previousTrack;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
-		spline = currentTrack.GetEnemyTrack();
+		currentTrack = firstTrack;
+        spline = currentTrack.GetEnemyTrack();
 		nextTrack = currentTrack.GetNextTrack();
 	}
 
@@ -30,9 +33,11 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(spline.EvaluateTangent(t));
             if (t > 1)
 			{
+				previousTrack = currentTrack;
 				currentTrack = nextTrack;
 				nextTrack = currentTrack.GetNextTrack();
                 spline = currentTrack.GetEnemyTrack();
+                Destroy(previousTrack.gameObject.transform.parent.gameObject);
                 t -= 1;
 			}
 		}
