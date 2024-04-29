@@ -200,7 +200,7 @@
       }
     },
     "com.unity.splines": {
-      "version": "2.4.0",
+      "version": "2.5.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
