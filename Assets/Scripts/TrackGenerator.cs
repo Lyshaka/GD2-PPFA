@@ -13,9 +13,10 @@ public class TrackGenerator : MonoBehaviour
 
 	[SerializeField] private float maxAngle = 180f;
 	[SerializeField] private float currentAngle;
-	[SerializeField] private float[] lastCurveAngles = new float[10] {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+	[SerializeField] private float[] lastCurveAngles = new float[20] {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f};
 
 	[SerializeField] private GameObject lastGeneratedTrack;
+	//[SerializeField] List<GameObject> validTracks = new List<GameObject>();
 	private Transform lastGeneratedEndTrack;
 
 	[SerializeField] private GameObject[] track;
@@ -37,27 +38,33 @@ public class TrackGenerator : MonoBehaviour
 	public void GenerateTrack()
 	{
 		lastGeneratedEndTrack = lastGeneratedTrack.GetComponentInChildren<Track>().GetEnd();
-        currentAngle = GetCurveAngle();
-        GameObject futureTrack = Instantiate(RandomTrack(currentAngle), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
+		GameObject futureTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
 		lastGeneratedTrack.GetComponentInChildren<Track>().SetNextTrack(futureTrack.GetComponentInChildren<Track>());
 		Track fTrack = futureTrack.GetComponentInChildren<Track>();
 		fTrack.SetPrevTrack(lastGeneratedTrack.GetComponentInChildren<Track>());
 		fTrack.SetGameManager(gameManager);
+		//currentAngle = GetCurveAngle();
 		AddCurveAngle(fTrack.GetAngle());
 		lastGeneratedTrack = futureTrack;
 	}
 
-	private GameObject RandomTrack(float angle)
+	private GameObject RandomTrack()
 	{
 		List<GameObject> validTracks = new List<GameObject>();
+		validTracks.Clear();
+		currentAngle = GetCurveAngle();
+		int t = 0;
 		for (int i = 0; i < track.Length; i++)
 		{
 			float trackAngle = track[i].GetComponentInChildren<Track>().GetAngle();
-            if ((trackAngle + angle) < maxAngle && (trackAngle + angle) > -maxAngle)
+			if ((trackAngle + currentAngle) < maxAngle && (trackAngle + currentAngle) > -maxAngle)
 			{
 				validTracks.Add(track[i]);
+				Debug.Log("Angle : " + (trackAngle + currentAngle));
+				t++;
 			}
 		}
+		//Debug.Log("i : " + t);
 		return (track[Random.Range(0, validTracks.Count)]);
 	}
 
@@ -66,6 +73,17 @@ public class TrackGenerator : MonoBehaviour
 		if (!randomSeed)
 		{
 			Random.InitState(seed);
+		}
+		StartCoroutine(AutoGen(200));
+	}
+	
+	IEnumerator AutoGen(int nb)
+	{
+		GenerateTrack();
+		yield return new WaitForSeconds(0.01f);
+		if (nb > 0)
+		{
+			StartCoroutine(AutoGen(nb - 1));
 		}
 	}
 }
