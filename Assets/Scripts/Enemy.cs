@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 	{
 		if (activated)
 		{
-			t += (Time.deltaTime * speed) / currentLength;
+			t += (Time.deltaTime * speed) / currentTrack.GetTrackLength();
 			transform.position = spline.EvaluatePosition(t);
 			transform.rotation = Quaternion.LookRotation(spline.EvaluateTangent(t));
 			if (t > 1)
