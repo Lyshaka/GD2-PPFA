@@ -53,18 +53,15 @@ public class TrackGenerator : MonoBehaviour
 		List<GameObject> validTracks = new List<GameObject>();
 		validTracks.Clear();
 		currentAngle = GetCurveAngle();
-		int t = 0;
 		for (int i = 0; i < track.Length; i++)
 		{
 			float trackAngle = track[i].GetComponentInChildren<Track>().GetAngle();
 			if ((trackAngle + currentAngle) < maxAngle && (trackAngle + currentAngle) > -maxAngle)
 			{
 				validTracks.Add(track[i]);
-				Debug.Log("Angle : " + (trackAngle + currentAngle));
-				t++;
+				//Debug.Log("Angle : " + (trackAngle + currentAngle));
 			}
 		}
-		//Debug.Log("i : " + t);
 		return (track[Random.Range(0, validTracks.Count)]);
 	}
 
@@ -74,7 +71,7 @@ public class TrackGenerator : MonoBehaviour
 		{
 			Random.InitState(seed);
 		}
-		StartCoroutine(AutoGen(200));
+		//StartCoroutine(AutoGen(200));
 	}
 	
 	IEnumerator AutoGen(int nb)

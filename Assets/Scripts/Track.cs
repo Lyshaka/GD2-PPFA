@@ -11,22 +11,23 @@ public class Track : MonoBehaviour
 	[SerializeField] private SplineContainer enemyTrack;
 
 	[SerializeField] private GameObject signR;
-    [SerializeField] private GameObject signL;
+	[SerializeField] private GameObject signL;
 
-    [SerializeField] private Track nextTrack;
+	[SerializeField] private Track nextTrack;
 	[SerializeField] private Track prevTrack;
 
 	[SerializeField] private CollectibleGenerator collectibleGenerator;
 
 	[SerializeField] private float enemyTrackLength;
-    [SerializeField] private float angle;
+	[SerializeField] private float totalTrackLength;
+	[SerializeField] private float angle;
 
-    public float GetAngle()
+	public float GetAngle()
 	{
 		return angle;
 	}
 
-    public void SetGameManager(GameManager gm)
+	public void SetGameManager(GameManager gm)
 	{
 		gameManager = gm;
 	}
@@ -66,12 +67,18 @@ public class Track : MonoBehaviour
 		return enemyTrackLength;
 	}
 
+	public float GetTotalTrackLength()
+	{
+		return totalTrackLength;
+	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.layer == 13)
 		{
 			Destroy(GetComponent<BoxCollider>());
 			other.gameObject.GetComponentInParent<TrackGenerator>().GenerateTrack();
+			gameManager?.SetCurrentLength(totalTrackLength);
 		}
 	}
 
@@ -80,21 +87,22 @@ public class Track : MonoBehaviour
 		enemyTrackLength = enemyTrack.CalculateLength();
 		if (gameManager != null)
 		{
-            gameManager.AddRoadLength(enemyTrackLength);
-            if (gameManager.ReachedMilestone())
-            {
-                if (Random.Range(0f, 1f) < 0.5f)
-                {
-                    signR.SetActive(true);
-                    signR.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
-                }
-                else
-                {
-                    signL.SetActive(true);
-                    signL.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
-                }
-            }
-        }
+			gameManager.AddRoadLength(enemyTrackLength);
+			totalTrackLength = gameManager.GetRoadLength();
+			if (gameManager.ReachedMilestone())
+			{
+				if (Random.Range(0f, 1f) < 0.5f)
+				{
+					signR.SetActive(true);
+					signR.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
+				}
+				else
+				{
+					signL.SetActive(true);
+					signL.GetComponent<Sign>().SetText("" + gameManager.GetMilestoneValue());
+				}
+			}
+		}
 		if (prevTrack != null)
 		{
 			GenerateCollectibleSpline();

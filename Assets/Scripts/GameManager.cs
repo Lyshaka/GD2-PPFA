@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] private float roadLength = 0f;
+	[SerializeField] private float currentLength;
 
 	private bool milestone = false;
 
@@ -19,6 +20,16 @@ public class GameManager : MonoBehaviour
 		roadLength += value;
 	}
 
+	public float GetCurrentLength()
+	{
+		return currentLength;
+	}
+
+	public void SetCurrentLength(float value)
+	{
+		currentLength = value;
+	}
+
 	public bool ReachedMilestone()
 	{
 		return milestone;
@@ -31,17 +42,5 @@ public class GameManager : MonoBehaviour
 	public float GetRoadLength()
 	{
 		return roadLength;
-	}
-
-	// Start is called before the first frame update
-	void Start()
-	{
-		
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		
 	}
 }

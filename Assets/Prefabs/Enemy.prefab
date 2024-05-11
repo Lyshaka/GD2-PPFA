@@ -303,8 +303,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  defaultSpeed: 25
+  speedMin: 1
+  speedMax: 1
   activated: 0
   firstTrack: {fileID: 0}
+  totalLength: 0
 --- !u!1001 &8997160590382963088
 PrefabInstance:
   m_ObjectHideFlags: 0
