@@ -1371,15 +1371,14 @@ MonoBehaviour:
   kartScript: {fileID: 1928019031}
   scoreText: {fileID: 1159798743}
   score: 0
-  test2:
-    rid: 1592577986674032641
-  references:
-    version: 2
-    RefIds:
-    - rid: 1592577986674032641
-      type: {class: ScoreManager/CollectibleDistribution, ns: , asm: Assembly-CSharp}
-      data:
-        milestone: 2.87
+  collectibleObject:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  collectibleMilestone:
+  - 0
+  - 0
+  - 0
 --- !u!1001 &1081782556
 PrefabInstance:
   m_ObjectHideFlags: 0
