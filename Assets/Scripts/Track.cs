@@ -59,7 +59,7 @@ public class Track : MonoBehaviour
 
 	public void GenerateCollectibleSpline()
 	{
-		collectibleGenerator.GenerateSpline(prevTrack.collectibleGenerator.GetEnd());
+		collectibleGenerator.GenerateCollectible(prevTrack.collectibleGenerator.GetEnd());
 	}
 
 	public float GetTrackLength()
@@ -103,7 +103,7 @@ public class Track : MonoBehaviour
 				}
 			}
 		}
-		if (prevTrack != null)
+		if (prevTrack != null && nextTrack == null)
 		{
 			GenerateCollectibleSpline();
 		}

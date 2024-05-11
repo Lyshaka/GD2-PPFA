@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float roadLength = 0f;
 	[SerializeField] private float currentLength;
 
-	private bool milestone = false;
 
+	private bool milestone = false;
 
 	public void AddRoadLength(float value)
 	{
