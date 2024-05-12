@@ -41,6 +41,13 @@ public class Enemy : MonoBehaviour
 		Destroy(trackToDestroy);
 		trackToDestroy = previousTrack.gameObject.transform.parent.gameObject;
 	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.layer == 13)
+		{
+			gameManager.GameOver();
+		}
+	}
 
 	// Start is called before the first frame update
 	void Start()
