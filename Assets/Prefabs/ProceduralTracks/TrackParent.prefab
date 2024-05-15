@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abe305f824bf4b4d922b89a2ec2dc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delta: 3
   spline: {fileID: 1080265384499191275}
   startA: {fileID: 2478573239187567110}
   startB: {fileID: 4087432158292315704}
@@ -89,6 +90,8 @@ MonoBehaviour:
   endB: {fileID: 6086415409893935083}
   start: {fileID: 5556471597250033844}
   end: {fileID: 8714528904662483689}
+  collectibleList:
+  - {fileID: 3240323583765142793, guid: 9b7fe2a290110be439ae167f0b58d968, type: 3}
 --- !u!1 &2826244999478539497
 GameObject:
   m_ObjectHideFlags: 0

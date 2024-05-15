@@ -32,6 +32,11 @@ public class Track : MonoBehaviour
 		gameManager = gm;
 	}
 
+	public void SetScoreManager(ScoreManager sm)
+	{
+		collectibleGenerator.SetScoreManager(sm);
+	}
+
 	public Transform GetEnd()
 	{
 		return end;

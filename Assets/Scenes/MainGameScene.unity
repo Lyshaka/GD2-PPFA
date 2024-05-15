@@ -2341,6 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 944054584}
+  scoreManager: {fileID: 944054586}
   randomSeed: 1
   seed: 7
   maxAngle: 180
@@ -2662,6 +2663,7 @@ SceneRoots:
   - {fileID: 510155028}
   - {fileID: 242093602}
   - {fileID: 407244473558195916}
+  - {fileID: 2095482839}
   - {fileID: 1892902635}
   - {fileID: 233007343}
   - {fileID: 1181258083}
@@ -2672,4 +2674,3 @@ SceneRoots:
   - {fileID: 337440711}
   - {fileID: 1310283290}
   - {fileID: 397818102}
-  - {fileID: 2095482839}

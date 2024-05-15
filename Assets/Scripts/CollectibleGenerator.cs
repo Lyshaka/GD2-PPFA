@@ -5,6 +5,8 @@ using UnityEngine.Splines;
 
 public class CollectibleGenerator : MonoBehaviour
 {
+	[SerializeField] private float delta = 1.5f;
+
 	[SerializeField] private SplineContainer spline;
 	[SerializeField] private Transform startA;
 	[SerializeField] private Transform startB;
@@ -14,8 +16,16 @@ public class CollectibleGenerator : MonoBehaviour
 	[SerializeField] private Transform start;
 	[SerializeField] private Transform end;
 
-	private float splineLength;
+	[SerializeField] private List<GameObject> collectibleList = new();
 
+	private ScoreManager scoreManager;
+
+	public void SetScoreManager(ScoreManager sm)
+	{
+		scoreManager = sm;
+	}
+
+	private float splineLength;
 
 	public void GenerateCollectible(Transform previousEnd)
 	{
@@ -34,6 +44,14 @@ public class CollectibleGenerator : MonoBehaviour
 		spline.Spline.SetKnot(1, endKnot);
 
 		splineLength = spline.CalculateLength();
+
+		int nbCollectibles = (int)(splineLength / delta);
+
+		for (int i = 0; i < nbCollectibles; i++)
+		{
+			GameObject obj = Instantiate(collectibleList[0], spline.EvaluatePosition((1f / nbCollectibles) * i), Quaternion.LookRotation(spline.EvaluateTangent((1f / nbCollectibles) * i)), gameObject.transform);
+			obj.GetComponent<Collectible>().SetScoreManager(scoreManager);
+		}
 	}
 
 	public Transform GetEnd()

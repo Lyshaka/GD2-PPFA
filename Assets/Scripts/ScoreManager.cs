@@ -19,6 +19,11 @@ public class ScoreManager : MonoBehaviour
 		scoreText.text = "Score : " + (int)score;
 	}
 
+	public void AddScore(float amount)
+	{
+		score += amount;
+	}
+
 	private void Start()
 	{
 		score = 0;

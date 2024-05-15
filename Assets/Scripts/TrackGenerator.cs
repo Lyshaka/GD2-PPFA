@@ -7,6 +7,7 @@ using UnityEngine;
 public class TrackGenerator : MonoBehaviour
 {
 	[SerializeField] private GameManager gameManager;
+	[SerializeField] private ScoreManager scoreManager;
 
 	[SerializeField] private bool randomSeed = false;
 	[SerializeField] private int seed;
@@ -43,6 +44,7 @@ public class TrackGenerator : MonoBehaviour
 		Track fTrack = futureTrack.GetComponentInChildren<Track>();
 		fTrack.SetPrevTrack(lastGeneratedTrack.GetComponentInChildren<Track>());
 		fTrack.SetGameManager(gameManager);
+		fTrack.SetScoreManager(scoreManager);
 		//currentAngle = GetCurveAngle();
 		AddCurveAngle(fTrack.GetAngle());
 		lastGeneratedTrack = futureTrack;
