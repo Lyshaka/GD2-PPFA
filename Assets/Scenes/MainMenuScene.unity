@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce1e0976fe0e94da8fa689df17b557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textScore: {fileID: 0}
 --- !u!1 &1863335889
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jeu qui fait peur dans le noir poursuivi par un monstre
+  m_text: Jeu de voiture qui fait peur dans le noir poursuivi par un monstre
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e141b3397d234c8685509c5d77ebcf1, type: 2}
   m_sharedMaterial: {fileID: 21962088495682642, guid: 0e141b3397d234c8685509c5d77ebcf1,

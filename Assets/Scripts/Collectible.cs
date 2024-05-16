@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
 	[SerializeField] private float collectSpeed = 10f;
+	[SerializeField] private GameObject collectibleFeedback;
 
 	private ScoreManager scoreManager;
 
@@ -29,6 +30,8 @@ public class Collectible : MonoBehaviour
 			yield return null;
 		}*/
 		scoreManager?.AddScore(10);
+		GameObject obj = Instantiate(collectibleFeedback, gameObject.transform.position, toFollow.rotation, toFollow);
+		obj.GetComponent<CollectibleFeedback>().SetText("" + 10);
 		Destroy(gameObject);
 		yield return null;
 	}
