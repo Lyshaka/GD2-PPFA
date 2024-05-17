@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-	[SerializeField] private float collectSpeed = 10f;
+	//[SerializeField] private float collectSpeed = 10f;
 	[SerializeField] private GameObject collectibleFeedback;
 
 	private ScoreManager scoreManager;

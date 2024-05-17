@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TrackGenerator : MonoBehaviour
@@ -38,6 +38,11 @@ public class TrackGenerator : MonoBehaviour
 
 	public void GenerateTrack()
 	{
+		StartCoroutine(Generator());
+	}
+
+	IEnumerator Generator()
+	{
 		lastGeneratedEndTrack = lastGeneratedTrack.GetComponentInChildren<Track>().GetEnd();
 		GameObject futureTrack = Instantiate(RandomTrack(), lastGeneratedEndTrack.position, lastGeneratedEndTrack.rotation);
 		lastGeneratedTrack.GetComponentInChildren<Track>().SetNextTrack(futureTrack.GetComponentInChildren<Track>());
@@ -48,6 +53,7 @@ public class TrackGenerator : MonoBehaviour
 		//currentAngle = GetCurveAngle();
 		AddCurveAngle(fTrack.GetAngle());
 		lastGeneratedTrack = futureTrack;
+		yield return new WaitForSeconds(0.2f);
 	}
 
 	private GameObject RandomTrack()
