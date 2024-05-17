@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyTrigger : MonoBehaviour
 {
 	[SerializeField] Enemy enemy;
+	[SerializeField] GameObject toDestroy;
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -12,6 +13,7 @@ public class EnemyTrigger : MonoBehaviour
 		{
 			enemy.SetActivated(true);
 			Destroy(gameObject);
+			Destroy(toDestroy);
 		}
 	}
 }

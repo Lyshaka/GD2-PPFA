@@ -2869,6 +2869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 739834685}
+  toDestroy: {fileID: 1432727288}
 --- !u!1 &2142926414
 GameObject:
   m_ObjectHideFlags: 0
